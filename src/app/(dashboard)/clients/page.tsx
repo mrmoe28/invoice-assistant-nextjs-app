@@ -4,7 +4,7 @@ import { useState } from "react";
 import { PremiumCard } from "@/components/super-design/premium-card";
 import { PremiumButton } from "@/components/super-design/premium-button";
 import { Button } from "@/components/ui/button";
-import { superDesignColors, invoiceDesignClasses } from "@/lib/super-design";
+import { invoiceDesignClasses } from "@/lib/super-design";
 import { cn } from "@/lib/utils";
 import {
   Users,
@@ -13,18 +13,13 @@ import {
   Filter,
   Download,
   Edit,
-  Trash2,
   Mail,
   Phone,
-  MapPin,
   FileText,
   DollarSign,
-  Calendar,
   Grid,
   List,
   MoreHorizontal,
-  User,
-  Building2,
   Star,
   Clock,
   TrendingUp,
@@ -403,7 +398,7 @@ export default function ClientsPage() {
       <PremiumCard title="👥 All Clients" description={`${filteredClients.length} client${filteredClients.length !== 1 ? 's' : ''} found`} className="bg-gradient-to-br from-white to-gray-50">
         {viewMode === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredClients.map((client, index) => {
+            {filteredClients.map((client) => {
               const statusConfig = getStatusConfig(client.status);
               return (
                 <div

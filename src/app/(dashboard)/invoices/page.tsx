@@ -4,7 +4,6 @@ import { useState } from "react";
 import { PremiumCard } from "@/components/super-design/premium-card";
 import { PremiumButton } from "@/components/super-design/premium-button";
 import { Button } from "@/components/ui/button";
-import { superDesignColors, superDesignVariants } from "@/lib/super-design";
 import { cn } from "@/lib/utils";
 import {
   FileText,
@@ -14,13 +13,11 @@ import {
   Download,
   Eye,
   Edit,
-  Trash2,
   CheckCircle,
   Clock,
   AlertCircle,
   Calendar,
   DollarSign,
-  Users,
   TrendingUp,
   MoreHorizontal,
   Grid,
@@ -152,9 +149,8 @@ export default function InvoicesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<InvoiceStatus>("all");
   const [sortField, setSortField] = useState<SortField>("id");
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
+  const [sortDirection] = useState<"asc" | "desc">("desc");
   const [viewMode, setViewMode] = useState<ViewMode>("list");
-  const [selectedInvoices, setSelectedInvoices] = useState<string[]>([]);
 
   // Filter and sort invoices
   const filteredInvoices = mockInvoices

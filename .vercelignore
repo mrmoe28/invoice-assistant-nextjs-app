@@ -1,0 +1,6 @@
+README.md
+*.md
+.git/
+node_modules/
+.DS_Store
+Thumbs.db

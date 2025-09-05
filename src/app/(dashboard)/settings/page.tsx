@@ -4,34 +4,25 @@ import { useState } from "react";
 import { PremiumCard } from "@/components/super-design/premium-card";
 import { PremiumButton } from "@/components/super-design/premium-button";
 import { Button } from "@/components/ui/button";
-import { superDesignColors, superDesignVariants } from "@/lib/super-design";
 import { cn } from "@/lib/utils";
 import {
-  Settings,
   User,
   Building2,
   CreditCard,
   Bell,
   Shield,
   Palette,
-  Globe,
   Mail,
-  Phone,
-  MapPin,
   Save,
   Upload,
   Camera,
   Eye,
   EyeOff,
   Check,
-  X,
   Moon,
   Sun,
   Monitor,
-  DollarSign,
-  Percent,
   FileText,
-  Clock,
   Zap,
   Star,
   Plus,

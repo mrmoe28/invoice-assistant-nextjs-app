@@ -5,7 +5,7 @@ import { Button, ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { superDesignVariants } from "@/lib/super-design";
 
-interface PremiumButtonProps extends ButtonProps {
+interface PremiumButtonProps extends Omit<ButtonProps, 'variant'> {
   variant?: 'premium' | 'glass' | 'thinkDifferent' | 'default';
   isLoading?: boolean;
 }

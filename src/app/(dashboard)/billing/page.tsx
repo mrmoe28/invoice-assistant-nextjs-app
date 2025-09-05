@@ -239,7 +239,7 @@ export default function BillingPage() {
         <Card className={premiumClasses.glassCard}>
           <CardHeader>
             <CardTitle>Feature Comparison</CardTitle>
-            <CardDescription>See what's included in each plan</CardDescription>
+            <CardDescription>See what&apos;s included in each plan</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">

@@ -156,9 +156,11 @@ export const invoiceDesignClasses = {
   }
 };
 
-export default {
+const superDesign = {
   colors: superDesignColors,
   variants: superDesignVariants,
   utils: superDesignUtils,
   invoice: invoiceDesignClasses,
 };
+
+export default superDesign;

@@ -117,13 +117,13 @@ export default function DashboardPage() {
               Think different
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 font-light">
-              Here's to the crazy ones. The misfits. The rebels. The troublemakers.
+              Here&apos;s to the crazy ones. The misfits. The rebels. The troublemakers.
             </p>
           </div>
           <p className="text-blue-200 text-lg max-w-3xl mx-auto leading-relaxed">
-            The round pegs in the square holes. The ones who see things differently. They're not fond of rules.
+            The round pegs in the square holes. The ones who see things differently. They&apos;re not fond of rules.
             And they have no respect for the status quo. You can quote them, disagree with them, glorify or
-            vilify them. About the only thing you can't do is ignore them. Because they change things.
+            vilify them. About the only thing you can&apos;t do is ignore them. Because they change things.
           </p>
           <div className="pt-6">
             <PremiumButton variant="glass" size="lg" className="text-lg px-10 py-4 text-white hover:bg-white/20">

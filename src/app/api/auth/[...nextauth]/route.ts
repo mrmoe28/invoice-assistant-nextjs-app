@@ -20,7 +20,7 @@ const handler = NextAuth({
       else if (new URL(url).origin === baseUrl) return url
       return `${baseUrl}/dashboard`
     },
-    async session({ session, token }) {
+    async session({ session }) {
       return session
     },
     async jwt({ token, user }) {

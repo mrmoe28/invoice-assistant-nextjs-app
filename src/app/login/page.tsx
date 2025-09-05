@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { signIn, getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { PremiumCard } from "@/components/super-design/premium-card";
 import { PremiumButton } from "@/components/super-design/premium-button";
 import { Button } from "@/components/ui/button";
-import { superDesignColors } from "@/lib/super-design";
 import { cn } from "@/lib/utils";
 import {
   FileText,
@@ -76,7 +75,7 @@ export default function LoginPage() {
             
             <div className="space-y-4">
               <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent leading-tight">
-                Here's to the crazy ones
+                Here&apos;s to the crazy ones
               </h2>
               <p className="text-xl text-gray-600 max-w-lg mx-auto lg:mx-0">
                 The misfits. The rebels. The troublemakers. The round pegs in the square holes.
@@ -246,7 +245,7 @@ export default function LoginPage() {
 
               {/* Sign Up Link */}
               <div className="text-center text-sm text-gray-600">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
                   Sign up for free
                 </a>
