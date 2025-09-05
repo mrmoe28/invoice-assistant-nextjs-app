@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  html {
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  body {
+    @apply antialiased;
+    font-family: var(--font-inter);
+  }
+}
+
+/* Super Design Color Variables */
+:root {
+  --super-primary: #2563eb;
+  --super-secondary: #7c3aed;
+  --super-accent: #06b6d4;
+  --super-success: #10b981;
+  --super-warning: #f59e0b;
+  --super-error: #ef4444;
+  --super-surface: #ffffff;
+  --super-surface-dark: #1f2937;
+  --super-text: #111827;
+  --super-text-dark: #f9fafb;
+  --super-border: #e5e7eb;
+  --super-border-dark: #374151;
+}
+
+.dark {
+  --super-surface: var(--super-surface-dark);
+  --super-text: var(--super-text-dark);
+  --super-border: var(--super-border-dark);
+}
+
+/* Premium Gradient Backgrounds */
+.gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.gradient-accent {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.gradient-hero {
+  background: linear-gradient(135deg, #7c3aed 0%, #2563eb 50%, #1e40af 100%);
+}
+
+/* Animation Classes */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
