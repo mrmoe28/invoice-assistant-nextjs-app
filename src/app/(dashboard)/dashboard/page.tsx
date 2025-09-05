@@ -3,7 +3,6 @@
 import { PremiumCard } from "@/components/super-design/premium-card";
 import { PremiumButton } from "@/components/super-design/premium-button";
 import { Button } from "@/components/ui/button";
-import { invoiceDesignClasses, superDesignColors } from "@/lib/super-design";
 import { cn } from "@/lib/utils";
 import {
   FileText,
@@ -148,7 +147,7 @@ export default function DashboardPage() {
                 )}>
                   <TrendingUp className={cn(
                     "w-3 h-3 mr-1",
-                    stat.changeType === "negative" && "rotate-180"
+                    stat.changeType !== "positive" && "rotate-180"
                   )} />
                   {stat.change}
                 </div>
