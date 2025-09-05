@@ -25,89 +25,19 @@ import {
   ArrowUpDown,
 } from "lucide-react";
 
-// Mock data for invoices - this would come from your database/API
-const mockInvoices = [
-  {
-    id: "INV-001",
-    client: "Acme Corporation",
-    clientEmail: "billing@acme.com",
-    amount: 2500,
-    status: "paid" as const,
-    dueDate: "2025-01-15",
-    issueDate: "2024-12-15",
-    items: 3,
-  },
-  {
-    id: "INV-002",
-    client: "TechStart Inc",
-    clientEmail: "finance@techstart.com",
-    amount: 1800,
-    status: "pending" as const,
-    dueDate: "2025-01-20",
-    issueDate: "2024-12-20",
-    items: 2,
-  },
-  {
-    id: "INV-003",
-    client: "Global Solutions",
-    clientEmail: "accounts@global.com",
-    amount: 3200,
-    status: "overdue" as const,
-    dueDate: "2025-01-10",
-    issueDate: "2024-12-10",
-    items: 4,
-  },
-  {
-    id: "INV-004",
-    client: "Innovation Labs",
-    clientEmail: "billing@innovation.com",
-    amount: 950,
-    status: "draft" as const,
-    dueDate: "2025-01-25",
-    issueDate: "2024-12-25",
-    items: 1,
-  },
-  {
-    id: "INV-005",
-    client: "Digital Agency Co",
-    clientEmail: "payments@digital.com",
-    amount: 4100,
-    status: "paid" as const,
-    dueDate: "2025-01-12",
-    issueDate: "2024-12-12",
-    items: 5,
-  },
-  {
-    id: "INV-006",
-    client: "Creative Studios",
-    clientEmail: "finance@creative.com",
-    amount: 2750,
-    status: "pending" as const,
-    dueDate: "2025-01-18",
-    issueDate: "2024-12-18",
-    items: 3,
-  },
-  {
-    id: "INV-007",
-    client: "Enterprise Corp",
-    clientEmail: "billing@enterprise.com",
-    amount: 5200,
-    status: "overdue" as const,
-    dueDate: "2025-01-08",
-    issueDate: "2024-12-08",
-    items: 6,
-  },
-  {
-    id: "INV-008",
-    client: "Startup Ventures",
-    clientEmail: "accounts@startup.com",
-    amount: 1350,
-    status: "draft" as const,
-    dueDate: "2025-01-30",
-    issueDate: "2024-12-30",
-    items: 2,
-  },
-];
+// Real invoices - will be populated from database when authenticated
+type Invoice = {
+  id: string;
+  client: string;
+  clientEmail: string;
+  amount: number;
+  status: "paid" | "pending" | "overdue" | "draft";
+  dueDate: string;
+  issueDate: string;
+  items: number;
+};
+
+const mockInvoices: Invoice[] = [];
 
 // Calculate stats from mock data
 const stats = [

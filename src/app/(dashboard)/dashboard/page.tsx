@@ -19,68 +19,46 @@ import {
   Calendar,
 } from "lucide-react";
 
-// Mock data - this would come from your database/API
+// Real data - will be populated from database/API when authenticated
 const stats = [
   {
     name: "Total Invoices",
-    value: "248",
-    change: "+12%",
+    value: "0",
+    change: "+0%",
     changeType: "positive" as const,
     icon: FileText,
   },
   {
     name: "Total Revenue",
-    value: "$54,239",
-    change: "+8.2%",
+    value: "$0",
+    change: "+0%",
     changeType: "positive" as const,
     icon: DollarSign,
   },
   {
     name: "Active Clients",
-    value: "73",
-    change: "+3",
+    value: "0",
+    change: "+0",
     changeType: "positive" as const,
     icon: Users,
   },
   {
     name: "Pending Payments",
-    value: "$12,450",
-    change: "-2.1%",
-    changeType: "negative" as const,
+    value: "$0",
+    change: "+0%",
+    changeType: "positive" as const,
     icon: Clock,
   },
 ];
 
-const recentInvoices = [
-  {
-    id: "INV-001",
-    client: "Acme Corporation",
-    amount: "$2,500",
-    status: "paid" as const,
-    dueDate: "2025-01-15",
-  },
-  {
-    id: "INV-002",
-    client: "TechStart Inc",
-    amount: "$1,800",
-    status: "pending" as const,
-    dueDate: "2025-01-20",
-  },
-  {
-    id: "INV-003",
-    client: "Global Solutions",
-    amount: "$3,200",
-    status: "overdue" as const,
-    dueDate: "2025-01-10",
-  },
-  {
-    id: "INV-004",
-    client: "Innovation Labs",
-    amount: "$950",
-    status: "draft" as const,
-    dueDate: "2025-01-25",
-  },
-];
+// Real invoices - will be populated from database when authenticated
+const recentInvoices: Array<{
+  id: string;
+  client: string;
+  amount: string;
+  status: "paid" | "pending" | "overdue" | "draft";
+  dueDate: string;
+}> = [];
 
 const quickActions = [
   {
@@ -214,54 +192,62 @@ export default function DashboardPage() {
       {/* Recent Invoices */}
       <PremiumCard title="📋 Recent Invoices" description="Your latest invoice activity" className="bg-gradient-to-br from-white to-gray-50">
         <div className="space-y-3">
-          {recentInvoices.map((invoice, index) => (
-            <div
-              key={invoice.id}
-              className="group flex items-center justify-between p-5 rounded-2xl hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-gray-200"
-            >
-              <div className="flex items-center space-x-4">
-                <div className={cn(
-                  "w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm transition-transform group-hover:scale-110",
-                  index % 4 === 0 && "bg-gradient-to-br from-blue-500 to-blue-600",
-                  index % 4 === 1 && "bg-gradient-to-br from-green-500 to-green-600",
-                  index % 4 === 2 && "bg-gradient-to-br from-purple-500 to-purple-600",
-                  index % 4 === 3 && "bg-gradient-to-br from-orange-500 to-orange-600"
-                )}>
-                  <FileText className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <div className="font-bold text-gray-900 text-lg">{invoice.id}</div>
-                  <div className="text-sm text-gray-600 font-medium">{invoice.client}</div>
-                  <div className="text-xs text-gray-500">Due: {invoice.dueDate}</div>
-                </div>
-              </div>
-              
-              <div className="text-right space-y-2">
-                <div className="font-bold text-xl bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-                  {invoice.amount}
-                </div>
-                <div className="flex items-center justify-end">
-                  <span
-                    className={cn(
-                      "inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold shadow-sm",
-                      {
-                        "bg-gradient-to-r from-green-500 to-emerald-500 text-white": invoice.status === "paid",
-                        "bg-gradient-to-r from-yellow-500 to-orange-500 text-white": invoice.status === "pending",
-                        "bg-gradient-to-r from-red-500 to-red-600 text-white": invoice.status === "overdue",
-                        "bg-gradient-to-r from-gray-500 to-gray-600 text-white": invoice.status === "draft",
-                      }
-                    )}
-                  >
-                    {invoice.status === "paid" && <CheckCircle className="w-3 h-3 mr-1" />}
-                    {invoice.status === "pending" && <Clock className="w-3 h-3 mr-1" />}
-                    {invoice.status === "overdue" && <AlertCircle className="w-3 h-3 mr-1" />}
-                    {invoice.status === "draft" && <Calendar className="w-3 h-3 mr-1" />}
-                    {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
-                  </span>
-                </div>
-              </div>
+          {recentInvoices.length === 0 ? (
+            <div className="text-center py-12 text-gray-500">
+              <FileText className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+              <p className="text-lg font-medium mb-2">No invoices yet</p>
+              <p className="text-sm">Create your first invoice to get started</p>
             </div>
-          ))}
+          ) : (
+            recentInvoices.map((invoice, index) => (
+              <div
+                key={invoice.id}
+                className="group flex items-center justify-between p-5 rounded-2xl hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-gray-200"
+              >
+                <div className="flex items-center space-x-4">
+                  <div className={cn(
+                    "w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm transition-transform group-hover:scale-110",
+                    index % 4 === 0 && "bg-gradient-to-br from-blue-500 to-blue-600",
+                    index % 4 === 1 && "bg-gradient-to-br from-green-500 to-green-600",
+                    index % 4 === 2 && "bg-gradient-to-br from-purple-500 to-purple-600",
+                    index % 4 === 3 && "bg-gradient-to-br from-orange-500 to-orange-600"
+                  )}>
+                    <FileText className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-gray-900 text-lg">{invoice.id}</div>
+                    <div className="text-sm text-gray-600 font-medium">{invoice.client}</div>
+                    <div className="text-xs text-gray-500">Due: {invoice.dueDate}</div>
+                  </div>
+                </div>
+                
+                <div className="text-right space-y-2">
+                  <div className="font-bold text-xl bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                    {invoice.amount}
+                  </div>
+                  <div className="flex items-center justify-end">
+                    <span
+                      className={cn(
+                        "inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold shadow-sm",
+                        {
+                          "bg-gradient-to-r from-green-500 to-emerald-500 text-white": invoice.status === "paid",
+                          "bg-gradient-to-r from-yellow-500 to-orange-500 text-white": invoice.status === "pending",
+                          "bg-gradient-to-r from-red-500 to-red-600 text-white": invoice.status === "overdue",
+                          "bg-gradient-to-r from-gray-500 to-gray-600 text-white": invoice.status === "draft",
+                        }
+                      )}
+                    >
+                      {invoice.status === "paid" && <CheckCircle className="w-3 h-3 mr-1" />}
+                      {invoice.status === "pending" && <Clock className="w-3 h-3 mr-1" />}
+                      {invoice.status === "overdue" && <AlertCircle className="w-3 h-3 mr-1" />}
+                      {invoice.status === "draft" && <Calendar className="w-3 h-3 mr-1" />}
+                      {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
         
         <div className="pt-6 border-t border-gray-200">

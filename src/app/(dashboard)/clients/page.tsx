@@ -25,99 +25,24 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-// Mock client data - this would come from your database/API
-const mockClients = [
-  {
-    id: "CLT-001",
-    name: "Acme Corporation",
-    email: "billing@acme.com",
-    phone: "+1 (555) 123-4567",
-    address: "123 Business Ave, New York, NY 10001",
-    company: "Acme Corporation",
-    totalInvoices: 15,
-    totalRevenue: 42500,
-    outstandingAmount: 2500,
-    lastInvoiceDate: "2024-12-15",
-    status: "active" as const,
-    avatar: "AC",
-    rating: 5,
-  },
-  {
-    id: "CLT-002", 
-    name: "Sarah Johnson",
-    email: "sarah@techstart.com",
-    phone: "+1 (555) 987-6543",
-    address: "456 Innovation Blvd, San Francisco, CA 94107",
-    company: "TechStart Inc",
-    totalInvoices: 8,
-    totalRevenue: 18900,
-    outstandingAmount: 1800,
-    lastInvoiceDate: "2024-12-20",
-    status: "active" as const,
-    avatar: "SJ",
-    rating: 4,
-  },
-  {
-    id: "CLT-003",
-    name: "Michael Chen",
-    email: "m.chen@global.com",
-    phone: "+1 (555) 456-7890",
-    address: "789 Corporate Way, Austin, TX 73301",
-    company: "Global Solutions",
-    totalInvoices: 22,
-    totalRevenue: 67200,
-    outstandingAmount: 3200,
-    lastInvoiceDate: "2024-12-10",
-    status: "overdue" as const,
-    avatar: "MC",
-    rating: 3,
-  },
-  {
-    id: "CLT-004",
-    name: "Emma Wilson",
-    email: "emma@innovation.com",
-    phone: "+1 (555) 321-0987",
-    address: "321 Research Dr, Boston, MA 02101",
-    company: "Innovation Labs",
-    totalInvoices: 5,
-    totalRevenue: 9500,
-    outstandingAmount: 950,
-    lastInvoiceDate: "2024-12-25",
-    status: "new" as const,
-    avatar: "EW",
-    rating: 5,
-  },
-  {
-    id: "CLT-005",
-    name: "David Rodriguez",
-    email: "david@digital.com",
-    phone: "+1 (555) 654-3210",
-    address: "654 Creative St, Los Angeles, CA 90210",
-    company: "Digital Agency Co",
-    totalInvoices: 18,
-    totalRevenue: 54300,
-    outstandingAmount: 0,
-    lastInvoiceDate: "2024-12-12",
-    status: "active" as const,
-    avatar: "DR",
-    rating: 5,
-  },
-  {
-    id: "CLT-006",
-    name: "Lisa Anderson",
-    email: "lisa@creative.com",
-    phone: "+1 (555) 789-0123",
-    address: "987 Design Ave, Seattle, WA 98101",
-    company: "Creative Studios",
-    totalInvoices: 12,
-    totalRevenue: 28750,
-    outstandingAmount: 2750,
-    lastInvoiceDate: "2024-12-18",
-    status: "active" as const,
-    avatar: "LA",
-    rating: 4,
-  },
-];
+// Real client data - will be populated from database when authenticated
+type Client = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  company: string;
+  totalInvoices: number;
+  totalRevenue: number;
+  outstandingAmount: number;
+  lastInvoiceDate: string;
+  status: "active" | "overdue" | "new";
+  avatar: string;
+  rating: number;
+};
+
+const mockClients: Client[] = [];
 
 // Calculate client stats
 const clientStats = [
