@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { PremiumCard } from "@/components/super-design/premium-card";
 import { PremiumButton } from "@/components/super-design/premium-button";
 import { Button } from "@/components/ui/button";
@@ -26,7 +27,7 @@ const stats: Array<{
   value: string;
   change: string;
   changeType: StatChangeType;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
 }> = [
   {
     name: "Total Invoices",
