@@ -1,6 +1,6 @@
 "use client";
 
-// Production Stripe integration configured with live API keys
+// Production Stripe & NextAuth integration configured with live API keys
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
