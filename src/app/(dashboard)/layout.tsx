@@ -13,6 +13,7 @@ import {
   FileText,
   Users,
   Settings,
+  CreditCard,
   Menu,
   X,
   Plus,
@@ -32,6 +33,7 @@ const navigation: NavigationItem[] = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Invoices", href: "/invoices", icon: FileText },
   { name: "Clients", href: "/clients", icon: Users },
+  { name: "Billing", href: "/billing", icon: CreditCard },
   { name: "Settings", href: "/settings", icon: Settings },
 ];
 

@@ -5,6 +5,14 @@ export async function POST(req: NextRequest) {
   try {
     const { priceId } = await req.json();
 
+    // Check if Stripe is properly initialized
+    if (!stripe) {
+      return NextResponse.json(
+        { error: "Stripe not configured - missing API keys" },
+        { status: 500 }
+      );
+    }
+
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       payment_method_types: ["card"],
@@ -14,8 +22,8 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/billing/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/billing`,
+      success_url: `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/billing/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/billing`,
     });
 
     return NextResponse.json({ sessionId: session.id });

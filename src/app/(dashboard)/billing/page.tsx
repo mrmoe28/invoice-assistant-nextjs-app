@@ -3,10 +3,26 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { PremiumButton } from "@/components/super-design/premium-button";
 import { superDesignUtils } from "@/lib/super-design";
-import { useUsage } from "@/contexts/usage-context";
+
+// Inline Badge component to avoid import issues
+const Badge = ({ children, variant = "default", className = "" }: { 
+  children: React.ReactNode; 
+  variant?: "default" | "secondary" | "destructive"; 
+  className?: string 
+}) => {
+  const variants = {
+    default: "bg-blue-500 text-white",
+    secondary: "bg-gray-100 text-gray-900",
+    destructive: "bg-red-500 text-white"
+  };
+  return (
+    <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${variants[variant]} ${className}`}>
+      {children}
+    </div>
+  );
+};
 import { getStripe } from "@/lib/stripe";
 import {
   Check,
@@ -22,7 +38,10 @@ import {
 
 export default function BillingPage() {
   const [loading, setLoading] = useState<string | null>(null);
-  const { invoiceCount, isSubscribed, subscriptionPlan } = useUsage();
+  // Mock usage data for demo (replace with real context when ready)
+  const invoiceCount = 1;
+  const isSubscribed = false;
+  const subscriptionPlan = "trial";
   const premiumClasses = superDesignUtils.getPremiumClasses();
 
   const handleSubscribe = async (priceId: string) => {
@@ -37,14 +56,22 @@ export default function BillingPage() {
         body: JSON.stringify({ priceId }),
       });
 
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to create checkout session");
+      }
+
       const { sessionId } = await response.json();
       const stripe = await getStripe();
       
       if (stripe) {
         await stripe.redirectToCheckout({ sessionId });
+      } else {
+        throw new Error("Stripe not available");
       }
     } catch (error) {
       console.error("Error:", error);
+      alert(`Subscription error: ${error instanceof Error ? error.message : "Unknown error"}`);
     } finally {
       setLoading(null);
     }
@@ -197,10 +224,10 @@ export default function BillingPage() {
               <PremiumButton
                 variant="premium"
                 className="w-full"
-                onClick={() => handleSubscribe("price_pro_monthly")}
-                disabled={loading === "price_pro_monthly"}
+                onClick={() => handleSubscribe("price_1S474BDhdksMh30lPuFyNR1k")}
+                disabled={loading === "price_1S474BDhdksMh30lPuFyNR1k"}
               >
-                {loading === "price_pro_monthly" ? "Processing..." : "Upgrade to Pro"}
+                {loading === "price_1S474BDhdksMh30lPuFyNR1k" ? "Processing..." : "Upgrade to Pro"}
               </PremiumButton>
             )}
           </CardContent>

@@ -102,7 +102,13 @@ export const superDesignUtils = {
       default:
         return "";
     }
-  }
+  },
+
+  // Premium styling classes for billing and subscription pages
+  getPremiumClasses: () => ({
+    gradientText: "bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent dark:from-white dark:to-gray-300",
+    glassCard: "bg-white/80 backdrop-blur-xl border border-gray-200/50 dark:bg-gray-900/80 dark:border-gray-700/50"
+  })
 };
 
 // Super_design specific CSS classes for invoice application
