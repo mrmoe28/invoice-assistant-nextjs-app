@@ -34,6 +34,7 @@ import {
   Clock,
   Zap,
   Star,
+  Plus,
 } from "lucide-react";
 
 type TabType = "profile" | "company" | "billing" | "notifications" | "security" | "appearance";

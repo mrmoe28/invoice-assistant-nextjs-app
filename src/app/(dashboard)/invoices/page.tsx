@@ -169,8 +169,8 @@ export default function InvoicesPage() {
       return matchesSearch && matchesStatus;
     })
     .sort((a, b) => {
-      let aValue: any = a[sortField];
-      let bValue: any = b[sortField];
+      let aValue: string | number | Date = a[sortField];
+      let bValue: string | number | Date = b[sortField];
       
       if (sortField === "amount") {
         aValue = a.amount;
