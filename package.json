@@ -13,7 +13,7 @@
     "db:studio": "prisma studio",
     "predeploy": "npm run lint && npm run build",
     "deploy:monitor": "vercel logs --limit=50 --follow",
-    "deploy:status": "vercel deployments ls --json",
+    "deploy:status": "vercel list",
     "env:pull": "vercel env pull .env.local",
     "env:list": "vercel env ls",
     "build:analyze": "vercel build --debug",
