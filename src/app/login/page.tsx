@@ -42,23 +42,13 @@ export default function LoginPage() {
     try {
       setError("");
       setIsGoogleLoading(true);
-      const result = await signIn('google', { 
-        callbackUrl: '/dashboard',
-        redirect: false 
+      // Redirect to Google OAuth
+      await signIn('google', { 
+        callbackUrl: '/dashboard'
       });
-      
-      if (result?.error) {
-        setError(result.error === 'OAuthSignin' 
-          ? 'Failed to connect to Google. Please try again.'
-          : 'Sign-in failed. Please try again.'
-        );
-      } else if (result?.ok) {
-        window.location.href = '/dashboard';
-      }
     } catch (error) {
       console.error('Google sign-in failed:', error);
       setError('An unexpected error occurred. Please try again.');
-    } finally {
       setIsGoogleLoading(false);
     }
   };
