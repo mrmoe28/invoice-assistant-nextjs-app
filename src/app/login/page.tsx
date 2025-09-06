@@ -43,13 +43,6 @@ export default function LoginPage() {
       setError("");
       setIsGoogleLoading(true);
       
-      // Check if required environment variables are available
-      if (!process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID) {
-        setError('Google OAuth is not properly configured. Please contact support.');
-        setIsGoogleLoading(false);
-        return;
-      }
-      
       // Redirect to Google OAuth
       const result = await signIn('google', { 
         callbackUrl: '/dashboard',
