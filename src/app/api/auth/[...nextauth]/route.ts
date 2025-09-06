@@ -1,9 +1,10 @@
 import NextAuth from 'next-auth'
-import Google from 'next-auth/providers/google'
+import GoogleProvider from 'next-auth/providers/google'
 
+// @ts-expect-error - NextAuth v4 with Next.js 15 compatibility
 const handler = NextAuth({
   providers: [
-    Google({
+    GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     })
@@ -14,20 +15,22 @@ const handler = NextAuth({
     error: '/login',
   },
   callbacks: {
-    async redirect({ url, baseUrl }) {
+    async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
       // Redirect to dashboard after successful login
       if (url.startsWith('/')) return `${baseUrl}${url}`
       else if (new URL(url).origin === baseUrl) return url
       return `${baseUrl}/dashboard`
     },
-    async session({ session, token }) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    async session({ session, token }: { session: any; token: any }) {
       // Add user ID to session from JWT token
       if (session?.user && token?.sub) {
         session.user.id = token.sub
       }
       return session
     },
-    async jwt({ token, user }) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    async jwt({ token, user }: { token: any; user: any }) {
       // Persist user ID to token
       if (user) {
         token.id = user.id
@@ -36,7 +39,7 @@ const handler = NextAuth({
     }
   },
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
