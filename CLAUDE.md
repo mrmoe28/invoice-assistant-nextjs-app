@@ -84,10 +84,25 @@ This file documents common issues and their solutions for the Invoice Assistant 
 
 ### Deployment Checklist
 - [ ] Environment variables configured in Vercel dashboard
+  - [ ] `NEXTAUTH_URL` = https://your-app.vercel.app (production URL)
+  - [ ] `NEXTAUTH_SECRET` = (secure random string)
+  - [ ] `GOOGLE_CLIENT_ID` = (Google OAuth client ID)
+  - [ ] `GOOGLE_CLIENT_SECRET` = (Google OAuth client secret)
+  - [ ] `DATABASE_URL` = (production database connection)
+  - [ ] `STRIPE_SECRET_KEY` = (Stripe secret key)
+  - [ ] `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` = (Stripe public key)
 - [ ] `.env` added to `.vercelignore`
 - [ ] NextAuth version compatible with Next.js version
 - [ ] Authentication endpoints returning correct responses
 - [ ] No placeholder values in production environment
+- [ ] Local `NEXTAUTH_URL` matches development server port
+
+### Critical Lesson: NEXTAUTH_URL Verification
+**Always verify that `NEXTAUTH_URL` is correctly set in both environments:**
+- Local: `http://localhost:PORT` (match actual dev server port)
+- Production: `https://your-app.vercel.app` (exact production domain)
+
+**Failure to set this correctly causes CLIENT_FETCH_ERROR**
 
 ## Key Learnings
 
