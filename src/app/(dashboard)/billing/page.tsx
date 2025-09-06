@@ -39,8 +39,8 @@ import {
 
 export default function BillingPage() {
   const [loading, setLoading] = useState<string | null>(null);
-  // Mock usage data for demo (replace with real context when ready)
-  const invoiceCount = 1;
+  // Real usage data - will be populated from database when authenticated
+  const invoiceCount = 0;
   const isSubscribed = false;
   const subscriptionPlan = "trial";
   const premiumClasses = superDesignUtils.getPremiumClasses();

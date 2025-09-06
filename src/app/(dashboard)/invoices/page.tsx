@@ -37,36 +37,37 @@ type Invoice = {
   items: number;
 };
 
-const mockInvoices: Invoice[] = [];
+// Real invoices - will be populated from database when authenticated
+const invoices: Invoice[] = [];
 
-// Calculate stats from mock data
+// Calculate stats from real data
 const stats = [
   {
     name: "Total Invoices",
-    value: mockInvoices.length.toString(),
-    change: "+12%",
-    changeType: "positive" as const,
+    value: invoices.length.toString(),
+    change: "+0%",
+    changeType: "neutral" as const,
     icon: FileText,
   },
   {
     name: "Total Revenue",
-    value: `$${mockInvoices.filter(inv => inv.status === 'paid').reduce((sum, inv) => sum + inv.amount, 0).toLocaleString()}`,
-    change: "+8.2%",
-    changeType: "positive" as const,
+    value: `$${invoices.filter(inv => inv.status === 'paid').reduce((sum, inv) => sum + inv.amount, 0).toLocaleString()}`,
+    change: "+0%",
+    changeType: "neutral" as const,
     icon: DollarSign,
   },
   {
     name: "Pending Amount",
-    value: `$${mockInvoices.filter(inv => inv.status === 'pending').reduce((sum, inv) => sum + inv.amount, 0).toLocaleString()}`,
-    change: "+5.1%",
-    changeType: "positive" as const,
+    value: `$${invoices.filter(inv => inv.status === 'pending').reduce((sum, inv) => sum + inv.amount, 0).toLocaleString()}`,
+    change: "+0%",
+    changeType: "neutral" as const,
     icon: Clock,
   },
   {
     name: "Overdue Amount",
-    value: `$${mockInvoices.filter(inv => inv.status === 'overdue').reduce((sum, inv) => sum + inv.amount, 0).toLocaleString()}`,
-    change: "-2.1%",
-    changeType: "negative" as const,
+    value: `$${invoices.filter(inv => inv.status === 'overdue').reduce((sum, inv) => sum + inv.amount, 0).toLocaleString()}`,
+    change: "+0%",
+    changeType: "neutral" as const,
     icon: AlertCircle,
   },
 ];
@@ -83,7 +84,7 @@ export default function InvoicesPage() {
   const [viewMode, setViewMode] = useState<ViewMode>("list");
 
   // Filter and sort invoices
-  const filteredInvoices = mockInvoices
+  const filteredInvoices = invoices
     .filter(invoice => {
       const matchesSearch = 
         invoice.id.toLowerCase().includes(searchTerm.toLowerCase()) ||

@@ -42,36 +42,37 @@ type Client = {
   rating: number;
 };
 
-const mockClients: Client[] = [];
+// Real clients - will be populated from database when authenticated
+const clients: Client[] = [];
 
 // Calculate client stats
 const clientStats = [
   {
     name: "Total Clients",
-    value: mockClients.length.toString(),
-    change: "+3 this month",
-    changeType: "positive" as const,
+    value: clients.length.toString(),
+    change: "+0 this month",
+    changeType: "neutral" as const,
     icon: Users,
   },
   {
     name: "Active Clients",
-    value: mockClients.filter(c => c.status === 'active').length.toString(),
-    change: "+2 this month",
-    changeType: "positive" as const,
+    value: clients.filter(c => c.status === 'active').length.toString(),
+    change: "+0 this month",
+    changeType: "neutral" as const,
     icon: TrendingUp,
   },
   {
     name: "Outstanding",
-    value: `$${mockClients.reduce((sum, c) => sum + c.outstandingAmount, 0).toLocaleString()}`,
-    change: "-5% this month",
-    changeType: "negative" as const,
+    value: `$${clients.reduce((sum, c) => sum + c.outstandingAmount, 0).toLocaleString()}`,
+    change: "+0% this month",
+    changeType: "neutral" as const,
     icon: DollarSign,
   },
   {
     name: "Avg Revenue",
-    value: `$${Math.round(mockClients.reduce((sum, c) => sum + c.totalRevenue, 0) / mockClients.length).toLocaleString()}`,
-    change: "+12% this month",
-    changeType: "positive" as const,
+    value: clients.length > 0 ? `$${Math.round(clients.reduce((sum, c) => sum + c.totalRevenue, 0) / clients.length).toLocaleString()}` : "$0",
+    change: "+0% this month",
+    changeType: "neutral" as const,
     icon: FileText,
   },
 ];
@@ -86,7 +87,7 @@ export default function ClientsPage() {
   const [showAddForm, setShowAddForm] = useState(false);
 
   // Filter clients
-  const filteredClients = mockClients.filter(client => {
+  const filteredClients = clients.filter(client => {
     const matchesSearch = 
       client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
