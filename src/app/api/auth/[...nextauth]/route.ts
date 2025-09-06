@@ -1,10 +1,9 @@
 import NextAuth from 'next-auth'
-import GoogleProvider from 'next-auth/providers/google'
-import type { NextAuthOptions } from 'next-auth'
+import Google from 'next-auth/providers/google'
 
-const authOptions: NextAuthOptions = {
+const handler = NextAuth({
   providers: [
-    GoogleProvider({
+    Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     })
@@ -42,9 +41,6 @@ const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === 'development',
-}
-
-// @ts-expect-error - NextAuth v4 compatibility with Next.js 15
-const handler = NextAuth(authOptions)
+})
 
 export { handler as GET, handler as POST }
