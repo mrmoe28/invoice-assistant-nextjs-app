@@ -48,6 +48,9 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const router = useRouter();
   const { data: session, status } = useSession();
+  
+  // Suppress unused variable warning for session (used in auth logic)
+  void session;
   const layoutClasses = superDesignUtils.getLayoutClasses("lg");
 
   // Redirect to login if not authenticated
