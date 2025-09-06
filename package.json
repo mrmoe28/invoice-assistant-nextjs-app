@@ -10,7 +10,14 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:generate": "prisma generate",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "predeploy": "npm run lint && npm run build",
+    "deploy:monitor": "vercel logs --limit=50 --follow",
+    "deploy:status": "vercel deployments ls --json",
+    "env:pull": "vercel env pull .env.local",
+    "env:list": "vercel env ls",
+    "build:analyze": "vercel build --debug",
+    "typecheck": "npx tsc --noEmit"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",

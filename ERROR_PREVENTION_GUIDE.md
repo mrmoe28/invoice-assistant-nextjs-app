@@ -83,7 +83,39 @@ GOOGLE_CLIENT_ID="your-client-id"
 GOOGLE_CLIENT_SECRET="your-client-secret"
 ```
 
-### 5. **Database Connection Errors** 🗄️
+### 5. **Prisma Client Initialization Errors** 🗄️
+
+**Error**: `@prisma/client did not initialize yet. Please run "prisma generate" and try to import it again.`
+
+**Root Cause**: Prisma client hasn't been generated after schema changes or fresh installation
+
+**✅ Solution**:
+```bash
+# Generate the Prisma client
+npm run db:generate
+# or
+npx prisma generate
+
+# Then test the build
+npm run build
+```
+
+**Prevention Protocol**:
+```bash
+# 1. Always generate client after schema changes
+npm run db:generate
+
+# 2. Test connection locally
+npm run db:push
+
+# 3. Verify schema is current
+npx prisma generate
+
+# 4. Check production database
+npx prisma studio
+```
+
+### 6. **Database Connection Errors** 🗄️
 
 **Error**: Database connection failures or schema issues
 

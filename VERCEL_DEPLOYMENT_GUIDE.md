@@ -299,23 +299,48 @@ npx tsc --init --strict --target es2022 --module esnext --moduleResolution node
 
 ## 📚 **Quick Reference Commands**
 
+### **Latest Vercel CLI Features (v47+)**
 ```bash
-# Pre-deployment validation
-npm run lint && npm run build
+# Update to latest Vercel CLI
+npm install -g vercel@latest
 
-# Environment variables
-vercel env ls
-vercel env add VARIABLE_NAME production
+# Pre-deployment validation with new scripts
+npm run predeploy          # Runs lint + build automatically
+npm run typecheck          # TypeScript check without build
+
+# Enhanced deployment monitoring
+npm run deploy:monitor     # Real-time deployment logs
+npm run deploy:status      # JSON deployment status
+vercel logs [URL] --follow # Monitor specific deployment
+
+# Advanced environment management
+npm run env:pull          # Pull production env to local
+npm run env:list          # List all environment variables
+vercel env add --environment=preview,production  # Multi-env setup
+
+# Build optimization and analysis
+npm run build:analyze     # Debug build with detailed output
+vercel build --local --debug  # Check build cache status
 
 # Database (Prisma)
 npx prisma generate
 npx prisma db push
 
-# Emergency deployment
+# Emergency deployment workflow
 git add . && git commit -m "fix: [error]" && git push
+npm run deploy:monitor    # Monitor the deployment
+```
 
-# Check deployment status
-vercel logs --limit=50
+### **New Workflow Integration**
+```bash
+# Complete deployment cycle with monitoring
+npm run predeploy && git add . && git commit -m "feat: description" && git push && npm run deploy:monitor
+
+# Environment sync for consistent development
+npm run env:pull && npm run dev
+
+# Performance analysis workflow  
+npm run build:analyze && npm run deploy:status
 ```
 
 ---
