@@ -1,10 +1,8 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
-// import { PrismaAdapter } from "@next-auth/prisma-adapter"
-// import { prisma } from '@/lib/prisma'
+import type { NextAuthOptions } from 'next-auth'
 
-const authOptions = {
-  // adapter: PrismaAdapter(prisma),
+const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -17,22 +15,20 @@ const authOptions = {
     error: '/login',
   },
   callbacks: {
-    async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
+    async redirect({ url, baseUrl }) {
       // Redirect to dashboard after successful login
       if (url.startsWith('/')) return `${baseUrl}${url}`
       else if (new URL(url).origin === baseUrl) return url
       return `${baseUrl}/dashboard`
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async session({ session, token }: { session: any; token: any }) {
+    async session({ session, token }) {
       // Add user ID to session from JWT token
       if (session?.user && token?.sub) {
         session.user.id = token.sub
       }
       return session
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async jwt({ token, user }: { token: any; user: any }) {
+    async jwt({ token, user }) {
       // Persist user ID to token
       if (user) {
         token.id = user.id
@@ -41,7 +37,8 @@ const authOptions = {
     }
   },
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === 'development',
