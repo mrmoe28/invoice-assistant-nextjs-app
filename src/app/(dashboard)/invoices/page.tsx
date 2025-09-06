@@ -41,7 +41,13 @@ type Invoice = {
 const invoices: Invoice[] = [];
 
 // Calculate stats from real data
-const stats = [
+const stats: Array<{
+  name: string;
+  value: string;
+  change: string;
+  changeType: "positive" | "negative" | "neutral";
+  icon: React.ComponentType<{ className?: string }>;
+}> = [
   {
     name: "Total Invoices",
     value: invoices.length.toString(),

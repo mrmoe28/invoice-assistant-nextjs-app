@@ -46,7 +46,13 @@ type Client = {
 const clients: Client[] = [];
 
 // Calculate client stats
-const clientStats = [
+const clientStats: Array<{
+  name: string;
+  value: string;
+  change: string;
+  changeType: "positive" | "negative" | "neutral";
+  icon: React.ComponentType<{ className?: string }>;
+}> = [
   {
     name: "Total Clients",
     value: clients.length.toString(),
