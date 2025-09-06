@@ -251,7 +251,7 @@ export default function LoginPage() {
               {/* Google Sign-In */}
               <PremiumButton
                 type="button"
-                variant="outline"
+                variant="default"
                 className="w-full h-12 text-base font-medium bg-white hover:bg-gray-50 border border-gray-200 text-gray-900 shadow-sm"
                 onClick={handleGoogleSignIn}
                 disabled={isGoogleLoading}
