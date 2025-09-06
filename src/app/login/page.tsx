@@ -42,10 +42,28 @@ export default function LoginPage() {
     try {
       setError("");
       setIsGoogleLoading(true);
+      
+      // Check if required environment variables are available
+      if (!process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID) {
+        setError('Google OAuth is not properly configured. Please contact support.');
+        setIsGoogleLoading(false);
+        return;
+      }
+      
       // Redirect to Google OAuth
-      await signIn('google', { 
-        callbackUrl: '/dashboard'
+      const result = await signIn('google', { 
+        callbackUrl: '/dashboard',
+        redirect: false
       });
+      
+      if (result?.error) {
+        console.error('Google sign-in error:', result.error);
+        setError('Google sign-in failed. Please try again.');
+        setIsGoogleLoading(false);
+      } else if (result?.url) {
+        // Redirect manually if needed
+        window.location.href = result.url;
+      }
     } catch (error) {
       console.error('Google sign-in failed:', error);
       setError('An unexpected error occurred. Please try again.');
@@ -237,6 +255,13 @@ export default function LoginPage() {
                   <span className="px-2 bg-white text-gray-500">or continue with</span>
                 </div>
               </div>
+
+              {/* Error Display */}
+              {error && (
+                <div className="w-full p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg">
+                  {error}
+                </div>
+              )}
 
               {/* Google Sign-In */}
               <PremiumButton
